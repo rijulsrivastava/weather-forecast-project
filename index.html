@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <h1>Forcast Weather</h1>
+    </header>
+    <main>
+        <div>
+            <div>
+                <input type="text" placeholder="Enter city">
+                <button><i class="fa-solid fa-location-crosshairs"></i></button>
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <div>
+                <select>
+                    <option value="Recently searched city" selected>Recently Searched City</option>
+                </select>
+            </div>
+            <div>
+                <h2 id="cityName"></h2>
+                <div>
+                    <h3 id="temperature"></h3>
+                    <img id="weatherIcon"  alt="Weather Icon">
+                </div>
+                <div>
+                    <button id="toggleButton">°C <i class="fa-solid fa-toggle-off"></i> <i class="fa-solid fa-toggle-on"></i> °F</button>
+                    <p id="description"></p>
+                    <p id="wind"></p>
+                    <p id="humidity"></p>
+                </div>
+            </div>
+        </div>
+        <div id="fiveDayForecast">
+
+        </div>
+    </main>
+</body>
+</html>
