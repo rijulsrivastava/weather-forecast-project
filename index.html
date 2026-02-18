@@ -33,18 +33,18 @@
             </div>
             
             
-            <div id="currentWeather" class="md:flex text-center shadow-2xl bg-transparent backdrop-blur-3xl rounded-[6px] p-2 hidden">
+            <div id="currentWeather" class="md:flex text-center shadow-2xl bg-transparent backdrop-blur-3xl rounded-[10px] p-2 mt-[10px] hidden">
                 
-                <h2 id="cityName" class="text-2xl md:text-3xl font-bold text-white mb-[10px]"></h2>
-                <div class="flex justify-center gap-6 md:p-4">
-                    <h3 id="temperature" class="font-bold text-white text-3xl "></h3>
-                    <img id="weatherImage" class="w-[40%]"  alt="Weather Icon">
+                <h2 id="cityName" class="text-3xl md:text-4xl font-bold text-white"></h2>
+                <div class="flex justify-evenly text-center items-center md:p-4">
+                    <h3 id="temperature" class="font-bold text-white text-5xl "></h3>
+                    <img id="weatherImage" src=""  alt="Weather Icon">
                 </div>
                 
-                <div class="flex flex-col gap-1.5 mt-[10px]">
-                    <p id="description"></p>
-                    <p id="wind"></p>
-                    <p id="humidity"></p>
+                <div class="flex flex-col gap-1">
+                    <p id="description" class="uppercase text-white"></p>
+                    <p id="wind" class="text-white"></p>
+                    <p id="humidity" class="text-white"></p>
                     <button id="toggleButton" class="text-white text-lg">°C <i class="fa-solid fa-toggle-off text-black"></i> <i class="fa-solid fa-toggle-on hidden"></i> °F</button>
                 </div>
             </div>
