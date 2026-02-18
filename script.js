@@ -15,7 +15,7 @@ locationBtn.addEventListener("click", () => {
     navigator.geolocation.getCurrentPosition(geoPosition => {
         const lat = geoPosition.coords.latitude;
         const long = geoPosition.coords.longitude;
-        console.log("latitude:" + lat , "longitude:" + long)
+        forecastByCoordinates(lat,long)
     }, (e) => {
         console.log("Can not get location",e)
     });
@@ -34,5 +34,13 @@ function forecastByCity(city) {
         })
         .catch(error => {
             console.log(error);
+        });
+}
+
+function forecastByCoordinates(lat, long) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${"e07e1f450087e2c0e4e9d3694e0dec43"}`)
+        .then(resolution => resolution.json())
+        .then(data => {
+            console.log("weather data:",data)
         });
 }
