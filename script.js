@@ -83,8 +83,9 @@ function displayWeather(data) {
     description.textContent = data.weather[0].description;
     wind.textContent = `Wind Speed: ${data.wind.speed} m/s`;
     humidity.textContent = `Humidity: ${data.main.humidity}%`;
-
+    
     displayWeatherAlert(currentTemperature);
+    dynamicBackground(data.weather[0].main);
 }
 
 const fiveDayForecast = document.querySelector("#fiveDayForecast")
@@ -211,4 +212,12 @@ function displayError(message) {
     dropdownContainer.classList.add("md:fixed","md:top-[210px]","lg:top-[160px]")
 }
 
-localStorage.clear()
+function dynamicBackground(climateConditions) {
+    if (climateConditions === "Rain") {
+        currentWeather.classList.add("bg-slate-400", "transition-all", "duration-600");
+
+    } 
+    else {
+        currentWeather.classList.remove("bg-slate-400");
+    }
+}
