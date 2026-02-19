@@ -74,6 +74,8 @@ function displayWeather(data) {
     description.textContent = data.weather[0].description;
     wind.textContent = `Wind Speed: ${data.wind.speed} m/s`;
     humidity.textContent = `Humidity: ${data.main.humidity}%`;
+
+    displayWeatherAlert(currentTemperature);
 }
 
 const fiveDayForecast = document.querySelector("#fiveDayForecast")
@@ -168,5 +170,16 @@ toggleBtn.addEventListener("click", () => {
     }
     celsius = !celsius;
 });
+
+const weatherCondition = document.querySelector("#weatherCondition")
+
+function displayWeatherAlert(temp){
+    if (temp>40){
+        weatherCondition.classList.remove("hidden");
+    }
+    else{
+        weatherCondition.classList.add("hidden");
+    }
+}
 
 
