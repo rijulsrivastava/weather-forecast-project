@@ -5,12 +5,17 @@ const searchContainer = document.querySelector(".searchContainer")
 
 searchBtn.addEventListener("click", ()=>{
     if (city.value.trim() === ""){
-        console.log("Enter city")
-        return
+        dropdownContainer.classList.add("md:fixed")
+        displayError("Enter city")
+        return;
     }
-    searchPosition.classList.remove("md:fixed")
     forecastByCity(city.value)
-    searchContainer.classList.add("justify-center")
+    if (!errorFlag){
+        searchPosition.classList.remove("md:fixed")
+        dropdownContainer.classList.remove("md:fixed")
+        searchContainer.classList.add("justify-center")
+    }
+    errorContainer.classList.add("hidden")
 
 });
 
@@ -22,8 +27,9 @@ locationBtn.addEventListener("click", () => {
         const lat = geoPosition.coords.latitude;
         const long = geoPosition.coords.longitude;
         forecastByCoordinates(lat,long)
-    }, (e) => {
-        console.log("Can not get location",e)
+    }, (event) => {
+        errorFlag = true;
+        displayError("Can not get location",event)
     });
 });
 
@@ -31,6 +37,7 @@ function forecastByCity(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${"e07e1f450087e2c0e4e9d3694e0dec43"}`)
         .then(resolution => {
             if (!resolution.ok) {
+
                 throw new Error("Enter valid city name");
             }
             return resolution.json();
@@ -42,7 +49,8 @@ function forecastByCity(city) {
             saveToHistory(city);
         })
         .catch(error => {
-            console.log(error);
+            errorFlag = true
+            displayError(error);
         });
     }
     
@@ -53,6 +61,7 @@ function forecastByCity(city) {
             displayWeather(data);
             searchContainer.classList.add("justify-center")
             currentWeather.classList.add("md:h-[500px]", "justify-center","md:text-2xl")
+            errorContainer.classList.add("hidden");
             weekForecast(lat, long);
         });
 }
@@ -81,6 +90,7 @@ function displayWeather(data) {
 const fiveDayForecast = document.querySelector("#fiveDayForecast")
 
 function weekForecast(lat, long) {
+    fiveDayForecast.classList.remove("hidden")
     fiveDayForecast.innerHTML = "";
 
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&units=metric&appid=${"e07e1f450087e2c0e4e9d3694e0dec43"}`)
@@ -141,11 +151,12 @@ function loadSearchHistory() {
     }
 }
 
-recentSearch.addEventListener("change", (e) => {
-    dropdownContainer.classList.remove("md:fixed")
+recentSearch.addEventListener("change", (event) => {
+    dropdownContainer.classList.remove("md:fixed","md:top-52", "lg:top-40")
     searchPosition.classList.remove("md:fixed")
     searchContainer.classList.add("justify-center")
-    forecastByCity(e.target.value);
+    forecastByCity(event.target.value);
+    errorContainer.classList.add("hidden")
 });
 
 loadSearchHistory();
@@ -182,4 +193,22 @@ function displayWeatherAlert(temp){
     }
 }
 
+const errorContainer = document.querySelector("#error")
+let errorFlag = false
 
+function displayError(message) {
+    errorContainer.textContent = message;
+    errorContainer.classList.remove("hidden");
+    currentWeather.classList.add("hidden");
+    searchPosition.classList.add("md:fixed")
+    searchContainer.classList.remove("justify-center")
+    fiveDayForecast.classList.add("hidden");
+    const ch = fiveDayForecast.querySelectorAll("div")
+    ch.forEach(div => {
+        div.classList.add("hidden");
+    });
+    errorFlag = false;
+    dropdownContainer.classList.add("md:fixed","md:top-[210px]","lg:top-[160px]")
+}
+
+localStorage.clear()
