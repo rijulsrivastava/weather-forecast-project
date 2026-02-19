@@ -149,3 +149,24 @@ recentSearch.addEventListener("change", (e) => {
 loadSearchHistory();
 
 
+const toggleBtn = document.querySelector("#toggleButton")
+const toggleC = document.querySelector(".fa-toggle-off")
+const toggleF = document.querySelector(".fa-toggle-on")
+celsius = true
+
+toggleBtn.addEventListener("click", () => {
+    let tempF = currentTemperature * 9/5 + 32
+    let tempC = currentTemperature
+    if (celsius) {
+        temperature.textContent = tempF.toFixed(1) + "°F";
+        toggleC.classList.add("hidden");
+        toggleF.classList.remove("hidden")
+    } else{
+        temperature.textContent = tempC.toFixed(1) + "°C";
+        toggleF.classList.add("hidden");
+        toggleC.classList.remove("hidden")
+    }
+    celsius = !celsius;
+});
+
+
