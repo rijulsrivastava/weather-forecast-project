@@ -10,30 +10,30 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="min-h-[100vh] bg-gradient-to-b from-blue-950 to-sky-400">
+<body class="min-h-[100vh] bg-fixed bg-gradient-to-b from-blue-950 to-sky-400">
     
-    <header class="h-[15%] p-4">
-        <h1 class="flex justify-center h-full items-center content-center text-3xl md:text-5xl text-transparent bg-clip-text font-bold bg-gradient-to-l from-blue-300 to-lime-100 ">Forecast Weather</h1>
+    <header class="h-[15vh] p-4">
+        <h1 class="flex justify-center  h-full items-center content-center text-3xl md:text-5xl text-transparent bg-clip-text font-bold bg-gradient-to-l from-blue-300 to-lime-100 ">Forecast Weather</h1>
     </header>
 
-    <main class="h-[85%] md:flex justify-evenly p-[20p] gap-4">
+    <main class="h-[85vh] md:flex justify-evenly px-[30px] md:px-0 gap-4">
         
-        <div class="flex flex-col gap-[10px] md:w-[45%] p-8 mb-2.5">
+        <div class="flex flex-col gap-[10px] searchContainer md:w-[40%]  md:mb-2.5">
             
-            <div class="flex justify-between">
+            <div class="flex justify-center gap-1 searchPosition md:fixed left-0 right-0 w-full">
                 <input id="city" type="text" placeholder="Enter city" class="text-center p-1 w-[80%] rounded-[6px]">
                 <button id="location" class="bg-gray-300  p-1 rounded-[6px]"><i class="fa-solid fa-location-crosshairs"></i></button>
                 <button id="search" class="bg-cyan-200  text-blue-700 p-1 rounded-[6px]"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
             
-            <div id="dropdownContainer" class="hidden">
+            <div id="dropdownContainer" class="flex justify-center hidden md:fixed left-11 right-11 md:top-52 lg:top-40 lg:left-[70px] lg:right-[70px]">
                 <select id="recentSearch" class="bg-cyan-200 p-1 rounded-[6px] text-center w-[100%]">
                     <option value="Recently searched city" selected>Recently Searched City</option>
                 </select>
             </div>
             
             
-            <div id="currentWeather" class="md:flex text-center shadow-2xl bg-transparent backdrop-blur-3xl rounded-[10px] p-2 mt-[10px] hidden">
+            <div id="currentWeather" class="flex flex-col text-center shadow-2xl bg-transparent backdrop-blur-3xl rounded-[10px] p-2 mt-[10px] hidden">
                 
                 <h2 id="cityName" class="text-3xl md:text-4xl font-bold text-white"></h2>
                 <div class="flex justify-evenly text-center items-center md:p-4">
@@ -50,7 +50,7 @@
             </div>
         </div>
         
-        <div id="fiveDayForecast" class="w-[35%]">
+        <div id="fiveDayForecast" class="flex flex-col md:grid grid-col-1 lg:grid-rows-5 mb-2.5 justify-center gap-4 md:w-[50%] py-4">
 
         </div>
 

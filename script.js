@@ -39,6 +39,7 @@ function forecastByCity(city) {
             displayWeather(data);
             currentWeather.classList.add("md:h-[500px]", "justify-center","md:text-2xl")
             weekForecast(data.coord.lat, data.coord.lon);
+            saveToHistory(city);
         })
         .catch(error => {
             console.log(error);
@@ -106,5 +107,45 @@ function weekForecast(lat, long) {
         });
 }
 
+const dropdownContainer = document.querySelector("#dropdownContainer");
+const recentSearch = document.querySelector("#recentSearch");
+
+function saveToHistory(city) {
+    let savedCities = JSON.parse(localStorage.getItem("savedCities")) || [];
+    if (!savedCities) {
+        savedCities = [];
+    }
+    if(savedCities.indexOf(city) === -1){
+        savedCities[savedCities.length] = city;
+        localStorage.setItem("savedCities", JSON.stringify(savedCities));
+    }
+    loadSearchHistory();
+}
+
+function loadSearchHistory() {
+    let savedCities = JSON.parse(localStorage.getItem("savedCities")) || [];
+    if (savedCities.length === 0){
+        return;
+    }
+    else{
+        dropdownContainer.classList.remove("hidden");
+        
+        savedCities.forEach(city => {
+            const option = document.createElement("option");
+            option.value = city;
+            option.textContent = city;
+            recentSearch.appendChild(option);
+        });
+    }
+}
+
+recentSearch.addEventListener("change", (e) => {
+    dropdownContainer.classList.remove("md:fixed")
+    searchPosition.classList.remove("md:fixed")
+    searchContainer.classList.add("justify-center")
+    forecastByCity(e.target.value);
+});
+
+loadSearchHistory();
 
 
