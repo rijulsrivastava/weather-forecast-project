@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
@@ -11,57 +12,72 @@
 </head>
 
 <body class="min-h-[100vh] bg-fixed bg-gradient-to-b from-blue-950 to-sky-400">
-    
     <header class="h-[15vh] p-4">
-        <h1 class="flex justify-center  h-full items-center content-center text-3xl md:text-5xl text-transparent bg-clip-text font-bold bg-gradient-to-l from-blue-300 to-lime-100 ">Forecast Weather</h1>
+        <h1
+            class="flex justify-center h-full items-center content-center text-3xl md:text-5xl text-transparent bg-clip-text font-bold bg-gradient-to-l from-blue-300 to-lime-100">
+            Forecast Weather
+        </h1>
     </header>
 
     <main class="h-[85vh] md:flex justify-evenly px-[30px] md:px-0 gap-4">
-        
-        <div class="flex flex-col gap-[10px] searchContainer md:w-[40%]  md:mb-2.5">
-            
+        <div class="flex flex-col gap-[10px] searchContainer md:w-[40%] md:mb-2.5">
+            <!-- city and gps search section -->
             <div class="flex justify-center gap-1 searchPosition md:fixed left-0 right-0 w-full">
-                <input id="city" type="text" placeholder="Enter city" class="text-center p-1 w-[80%] rounded-[6px]">
-                <button id="location" class="bg-gray-300  p-1 rounded-[6px]"><i class="fa-solid fa-location-crosshairs"></i></button>
-                <button id="search" class="bg-cyan-200  text-blue-700 p-1 rounded-[6px]"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <input id="city" type="text" placeholder="Enter city" class="text-center p-1 w-[80%] rounded-[6px]" />
+                <button id="location" class="bg-gray-300 p-1 rounded-[6px]">
+                    <i class="fa-solid fa-location-crosshairs"></i>
+                </button>
+                <button id="search" class="bg-cyan-200 text-blue-700 p-1 rounded-[6px]">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
             </div>
-            
-            <div id="dropdownContainer" class="flex justify-center hidden md:fixed left-11 right-11 md:top-52 lg:top-40 lg:left-[70px] lg:right-[70px]">
+            <!-- recent search menu -->
+            <div id="dropdownContainer"
+                class="flex justify-center hidden md:fixed left-11 right-11 md:top-52 lg:top-40 lg:left-[70px] lg:right-[70px]">
                 <select id="recentSearch" class="bg-cyan-200 p-1 rounded-[6px] text-center w-[100%]">
-                    <option value="Recently searched city" selected>Recently Searched City</option>
+                    <option value="Recently searched city" selected>
+                        Recently Searched City
+                    </option>
                 </select>
             </div>
-            
-            <div id="error"class="hidden bg-red-100 text-red-700 p-[10px] rounded-[6px] mb-4 text-center md:fixed top-[260px] left-11 right-11 lg:top-[210px] lg:left-[70px] lg:right-[70px]">
-
+            <!-- error showing section -->
+            <div id="error"
+                class="hidden bg-red-100 text-red-700 p-[10px] rounded-[6px] mb-4 text-center md:fixed top-[260px] left-11 right-11 lg:top-[210px] lg:left-[70px] lg:right-[70px]">
             </div>
-            
-            <div id="currentWeather" class="flex flex-col text-center shadow-2xl bg-transparent backdrop-blur-3xl rounded-[10px] p-2 mt-[10px] hidden">
-                
+            <!-- current weather section -->
+            <div id="currentWeather"
+                class="flex flex-col text-center shadow-2xl bg-transparent backdrop-blur-3xl rounded-[10px] p-2 mt-[10px] hidden">
                 <h2 id="cityName" class="text-3xl md:text-4xl font-bold text-white"></h2>
                 <div class="flex justify-evenly text-center items-center md:p-4">
-                    <h3 id="temperature" class="font-bold text-white text-5xl "></h3>
-                    <img id="weatherImage" src=""  alt="Weather Icon">
+                    <h3 id="temperature" class="font-bold text-white text-5xl"></h3>
+                    <img id="weatherImage" src="" alt="Weather Icon" />
                 </div>
-                
-                <div id="weatherCondition" class="hidden bg-amber-200 text-red-600 text-xl font-bold p-2 rounded-[8px] m-[10px]">
-                    <p><i class="fa-solid fa-triangle-exclamation"></i> Extreme Temperature</p>
+
+                <div id="weatherCondition"
+                    class="hidden bg-amber-200 text-red-600 text-xl font-bold p-2 rounded-[8px] m-[10px]">
+                    <p>
+                        <i class="fa-solid fa-triangle-exclamation"></i> Extreme
+                        Temperature
+                    </p>
                 </div>
-                
+
                 <div class="flex flex-col gap-1">
                     <p id="description" class="uppercase text-white"></p>
                     <p id="wind" class="text-white"></p>
                     <p id="humidity" class="text-white"></p>
-                    <button id="toggleButton" class="text-white text-lg">°C <i class="fa-solid fa-toggle-off text-black"></i> <i class="fa-solid fa-toggle-on hidden"></i> °F</button>
+                    <button id="toggleButton" class="text-white text-lg">
+                        °C <i class="fa-solid fa-toggle-off text-black"></i>
+                        <i class="fa-solid fa-toggle-on hidden"></i> °F
+                    </button>
                 </div>
             </div>
         </div>
-        
-        <div id="fiveDayForecast" class="flex flex-col md:grid grid-col-1 lg:grid-rows-5 mb-2.5 justify-center gap-4 md:w-[50%] py-4">
-
-        </div>
+        <!-- five day forecast section -->
+        <div id="fiveDayForecast"
+            class="flex flex-col md:grid grid-col-1 lg:grid-rows-5 mb-2.5 justify-center gap-4 md:w-[50%] py-4"></div>
 
         <script src="./script.js"></script>
     </main>
 </body>
+
 </html>

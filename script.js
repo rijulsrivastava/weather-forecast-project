@@ -1,3 +1,5 @@
+// Adding event listner to search button to search user entered city
+
 const city = document.querySelector("#city");
 const searchBtn = document.querySelector("#search");
 const searchPosition = document.querySelector(".searchPosition")
@@ -19,11 +21,14 @@ searchBtn.addEventListener("click", ()=>{
 
 });
 
+
+// adding event listner to gps button to get current location
 const locationBtn = document.querySelector("#location");
 
 locationBtn.addEventListener("click", () => {
     navigator.geolocation.getCurrentPosition(geoPosition => {
         searchPosition.classList.remove("md:fixed")
+        dropdownContainer.classList.remove("md:fixed","md:top-52", "lg:top-40")
         const lat = geoPosition.coords.latitude;
         const long = geoPosition.coords.longitude;
         forecastByCoordinates(lat,long)
@@ -33,6 +38,7 @@ locationBtn.addEventListener("click", () => {
     });
 });
 
+// forcasting weather by user entered city
 function forecastByCity(city) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${"e07e1f450087e2c0e4e9d3694e0dec43"}`)
         .then(resolution => {
@@ -53,19 +59,23 @@ function forecastByCity(city) {
             displayError(error);
         });
     }
-    
-    function forecastByCoordinates(lat, long) {
-        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${"e07e1f450087e2c0e4e9d3694e0dec43"}`)
-        .then(resolution => resolution.json())
-        .then(data => {
-            displayWeather(data);
-            searchContainer.classList.add("justify-center")
-            currentWeather.classList.add("md:h-[500px]", "justify-center","md:text-2xl")
-            errorContainer.classList.add("hidden");
-            weekForecast(lat, long);
-        });
+
+
+// forecasting by gps location
+function forecastByCoordinates(lat, long) {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${"e07e1f450087e2c0e4e9d3694e0dec43"}`)
+    .then(resolution => resolution.json())
+    .then(data => {
+        displayWeather(data);
+        searchContainer.classList.add("justify-center")
+        currentWeather.classList.add("md:h-[500px]", "justify-center","md:text-2xl")
+        errorContainer.classList.add("hidden");
+        weekForecast(lat, long);
+    });
 }
 
+
+// displaying current Weather
 const currentWeather = document.querySelector("#currentWeather");
 const cityName = document.querySelector("#cityName");
 const temperature = document.querySelector("#temperature");
@@ -88,6 +98,8 @@ function displayWeather(data) {
     dynamicBackground(data.weather[0].main);
 }
 
+
+// displaying five day weather
 const fiveDayForecast = document.querySelector("#fiveDayForecast")
 
 function weekForecast(lat, long) {
@@ -120,6 +132,7 @@ function weekForecast(lat, long) {
         });
 }
 
+// storing city into history
 const dropdownContainer = document.querySelector("#dropdownContainer");
 const recentSearch = document.querySelector("#recentSearch");
 
@@ -135,6 +148,7 @@ function saveToHistory(city) {
     loadSearchHistory();
 }
 
+// adding recent search menu to show search history
 function loadSearchHistory() {
     let savedCities = JSON.parse(localStorage.getItem("savedCities")) || [];
     if (savedCities.length === 0){
@@ -152,6 +166,7 @@ function loadSearchHistory() {
     }
 }
 
+// adding event listner to recent search to forecast by city stored in search history
 recentSearch.addEventListener("change", (event) => {
     dropdownContainer.classList.remove("md:fixed","md:top-52", "lg:top-40")
     searchPosition.classList.remove("md:fixed")
@@ -162,7 +177,7 @@ recentSearch.addEventListener("change", (event) => {
 
 loadSearchHistory();
 
-
+// adding toggle button funtionality
 const toggleBtn = document.querySelector("#toggleButton")
 const toggleC = document.querySelector(".fa-toggle-off")
 const toggleF = document.querySelector(".fa-toggle-on")
@@ -183,6 +198,7 @@ toggleBtn.addEventListener("click", () => {
     celsius = !celsius;
 });
 
+// addding extreme weather alert
 const weatherCondition = document.querySelector("#weatherCondition")
 
 function displayWeatherAlert(temp){
@@ -194,6 +210,8 @@ function displayWeatherAlert(temp){
     }
 }
 
+
+// displaying error feature
 const errorContainer = document.querySelector("#error")
 let errorFlag = false
 
@@ -212,6 +230,7 @@ function displayError(message) {
     dropdownContainer.classList.add("md:fixed","md:top-[210px]","lg:top-[160px]")
 }
 
+// updating backgroung bsaed on current weather
 function dynamicBackground(climateConditions) {
     if (climateConditions === "Rain") {
         currentWeather.classList.add("bg-slate-400", "transition-all", "duration-600");
