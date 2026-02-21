@@ -16,6 +16,12 @@
     <li>To handle errors by validating user input</li>
 </ol>
 
+<h2>How you can run this project on your computer</h2>
+<ul>
+    <li>How to clone this project: <br> git clone https://github.com/rijulsrivastava/weather-forecast-project.git</li>
+    <li>Then open script.js file then enter your API key</li>
+    <li>At last run the index.html file</li>
+</ul>
 
 <h2>GitHub link</h2>
 <a href="https://github.com/rijulsrivastava/weather-forecast-project.git">https://github.com/rijulsrivastava/weather-forecast-project.git</a>
